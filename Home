@@ -1,0 +1,52 @@
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+        return "index"; // Trả về trang chủ
+    }
+
+    @GetMapping("/booking")
+    public String booking() {
+        return "booking"; // Trả về trang đặt vé
+    }
+
+    @GetMapping("/schedule")
+    public String schedule() {
+        return "schedule"; // Trả về trang hủy chuyến
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact"; // Trả về trang liên hệ
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about"; // Trả về trang giới thiệu
+    }
+
+    @GetMapping("/search")
+    public String search(
+            @RequestParam String departureLocation,
+            @RequestParam String arrivalLocation,
+            @RequestParam String departureDate,
+            Model model
+    ) {
+        // Xử lý tìm kiếm tại đây (có thể truy vấn từ database hoặc xử lý logic)
+        
+        // Giả lập kết quả và thêm vào model để hiển thị trên trang
+        model.addAttribute("departureLocation", departureLocation);
+        model.addAttribute("arrivalLocation", arrivalLocation);
+        model.addAttribute("departureDate", departureDate);
+        model.addAttribute("message", "Tìm thấy chuyến xe phù hợp!");
+
+        return "search-results"; // Trả về trang kết quả tìm kiếm
+    }
+}
